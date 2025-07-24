@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from back.routes import basic_routes, get_resources, image_routes
+from back.routes import image_routes
 from fastapi.middleware.cors import CORSMiddleware
 
 
