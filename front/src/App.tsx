@@ -100,7 +100,7 @@ function App() {
 
 const enviarImagenAlBackend = async (blob: Blob) => {
   const formData = new FormData();
-  formData.append("file", blob, "foto.jpg"); // clave esperada por FastAPI
+  formData.append("file", blob, "foto.jpg");
 
   try {
     const response = await fetch("http://localhost:8000/imagen/predecir", {
@@ -108,17 +108,33 @@ const enviarImagenAlBackend = async (blob: Blob) => {
       body: formData
     });
 
+    console.log("📡 status:", response.status, response.statusText);
+
+    const text = await response.text();
+    console.log("💬 raw response body:", text);
+
+    // intenta parsear JSON sólo si es JSON válido
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch(e) {
+      console.error("❌ No es JSON válido:", e);
+      throw new Error("Respuesta no JSON");
+    }
+
     if (!response.ok) {
+      console.error("❌ response.ok === false, data:", data);
       throw new Error("Error en la respuesta del servidor");
     }
 
-    const data = await response.json();
-    return data.resultado; // <-- asegúrate que sea "resultado" si en Swagger devuelves eso
+    console.log("✅ data:", data);
+    return data.resultado;
   } catch (error) {
-    console.error("Error al enviar la imagen:", error);
+    console.error("🚨 enviarImagenAlBackend error:", error);
     return null;
   }
 };
+
 
 
 const captureImage = async () => {
@@ -149,14 +165,16 @@ const captureImage = async () => {
     const resultado = await enviarImagenAlBackend(blob);
 
     if (resultado) {
-      const { clasificacion, deteccion } = resultado;
+      const { clasificacion, deteccion, tipo_piel } = resultado;
 
       const detecciones = deteccion.length > 0
         ? deteccion.join(", ")
         : "ninguna anomalía detectada";
 
-      setAnalisisResultado(
-        `🔍 Edad estimada: ${clasificacion}. Recomendamos productos para ese grupo de edad.\n🩺 Análisis de piel: ${detecciones}.`
+      setAnalisisResultado(  
+        `🔍 Edad estimada: ${clasificacion}.\n` +
+        `🩺 Análisis de piel: ${detecciones}.\n` +
+        `💧 Tipo de piel: ${tipo_piel}.`
       );
       } else {
         setAnalisisResultado("❌ No se pudo realizar la predicción.");
