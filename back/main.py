@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Modelo IA",
-    description="API para predecir edad a partir de imagen facial",
+    description="API para predecir edad, afecciones y tipo de piel a partir de imagen facial",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
