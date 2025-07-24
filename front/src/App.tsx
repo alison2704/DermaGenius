@@ -149,10 +149,19 @@ const captureImage = async () => {
     const resultado = await enviarImagenAlBackend(blob);
 
     if (resultado) {
-      setAnalisisResultado(`🔍 Edad estimada: ${resultado}. Recomendamos productos para ese grupo de edad.`);
-    } else {
-      setAnalisisResultado("❌ No se pudo realizar la predicción.");
-    }
+      const { clasificacion, deteccion } = resultado;
+
+      const detecciones = deteccion.length > 0
+        ? deteccion.join(", ")
+        : "ninguna anomalía detectada";
+
+      setAnalisisResultado(
+        `🔍 Edad estimada: ${clasificacion}. Recomendamos productos para ese grupo de edad.\n🩺 Análisis de piel: ${detecciones}.`
+      );
+      } else {
+        setAnalisisResultado("❌ No se pudo realizar la predicción.");
+      }
+
 
     setIsAnalyzing(false);
     setDiagnosisComplete(true);
