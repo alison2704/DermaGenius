@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from back.routes import image_routes
+from back.routes import image_routes, product_routes
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -26,6 +26,7 @@ app.add_middleware(
 #app.include_router(basic_routes.router)
 #app.include_router(get_resources.router)
 app.include_router(image_routes.router)
+app.include_router(product_routes.router)
 
 if __name__ == "__main__":
     import uvicorn

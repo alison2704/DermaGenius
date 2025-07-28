@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "GEL LIMPIADOR DE TE VERDE",
+    "descripcion": "Gel ligero enriquecido con té verde que limpia y purifica la piel dejándola libre de grasa e impurezas.",
+    "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
+    "imagen": "ID1.png",
+    "precio": 28.00
+  },
+
+  {
+    "id": 2,
+    "nombre": "GEL ANTI-ACNÉ",
+    "descripcion": "Antiacné es un tratamiento nocturno.",
+    "etiquetas": ["acne"],
+    "imagen": "ID2.png",
+    "precio": 32.00
+  },
+
+  {
+    "id": 3,
+    "nombre": "TÓNICO FACIAL TÉ VERDE",
+    "descripcion": "Para piel grasa, antioxidante de amplio espectro para sus propiedades desinflamantes útil para pieles acneicas y humectante.",
+    "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
+    "imagen": "ID3.png",
+    "precio": 18.75
+  },
+
+  {
+    "id": 4,
+    "nombre": "Photoderm AKN MAT SPF30",
+    "descripcion": "Piel con tendencia acneica Piel mixta grasa",
+    "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
+    "imagen": "ID4.png",
+    "precio": 20
+  }
+
+] 

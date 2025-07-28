@@ -7,50 +7,34 @@ import { useRef, useEffect } from 'react';
 // Tipos de datos
 interface Product {
   id: number;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-  category: string;
+  nombre: string;
+  precio: number;
+  descripcion: string;
+  imagen: string;
+  etiquetas: string[];
 }
 
 interface CartItem extends Product {
   quantity: number;
 }
 
-// Datos mock de productos
+// Datos mock de productos (fallback)
 const mockProducts: Product[] = [
   {
     id: 1,
-    name: "Crema Hidratante Facial",
-    price: 29.99,
-    description: "Crema hidratante con ácido hialurónico para piel seca",
-    image: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=300",
-    category: "Hidratante"
+    nombre: "GEL LIMPIADOR DE TE VERDE",
+    precio: 28.00,
+    descripcion: "Gel ligero enriquecido con té verde que limpia y purifica la piel dejándola libre de grasa e impurezas.",
+    imagen: "/static/images/ID1.png",
+    etiquetas: ["0-12","13-18", "19-30", "grasa", "acne"]
   },
   {
     id: 2,
-    name: "Protector Solar SPF 50",
-    price: 24.99,
-    description: "Protección solar avanzada para todo tipo de piel",
-    image: "https://images.pexels.com/photos/7755295/pexels-photo-7755295.jpeg?auto=compress&cs=tinysrgb&w=300",
-    category: "Protección"
-  },
-  {
-    id: 3,
-    name: "Serum Vitamina C",
-    price: 39.99,
-    description: "Serum antioxidante con vitamina C para luminosidad",
-    image: "https://images.pexels.com/photos/7755315/pexels-photo-7755315.jpeg?auto=compress&cs=tinysrgb&w=300",
-    category: "Tratamiento"
-  },
-  {
-    id: 4,
-    name: "Limpiador Facial Suave",
-    price: 19.99,
-    description: "Limpiador facial para piel sensible",
-    image: "https://images.pexels.com/photos/5069394/pexels-photo-5069394.jpeg?auto=compress&cs=tinysrgb&w=300",
-    category: "Limpieza"
+    nombre: "GEL ANTI-ACNÉ",
+    precio: 32.00,
+    descripcion: "Antiacné es un tratamiento nocturno.",
+    imagen: "/static/images/ID2.png",
+    etiquetas: ["acne"]
   }
 ];
 
@@ -63,6 +47,7 @@ function App() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [analisisResultado, setAnalisisResultado] = useState<string>("");
+  const [productosRecomendados, setProductosRecomendados] = useState<Product[]>([]);
 
 
   // Inicializa la cámara al cargar la pantalla de diagnóstico
@@ -135,6 +120,29 @@ const enviarImagenAlBackend = async (blob: Blob) => {
   }
 };
 
+const obtenerRecomendaciones = async (etiquetas: string[]) => {
+  try {
+    const response = await fetch("http://localhost:8000/productos/recomendar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(etiquetas)
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al obtener recomendaciones");
+    }
+
+    const data = await response.json();
+    console.log("✅ Productos recomendados:", data);
+    return data.productos || [];
+  } catch (error) {
+    console.error("🚨 Error al obtener recomendaciones:", error);
+    return mockProducts; // Fallback a productos mock
+  }
+};
+
 
 
 const captureImage = async () => {
@@ -176,10 +184,15 @@ const captureImage = async () => {
         `🩺 Análisis de piel: ${detecciones}.\n` +
         `💧 Tipo de piel: ${tipo_piel}.`
       );
-      } else {
-        setAnalisisResultado("❌ No se pudo realizar la predicción.");
-      }
 
+      // Obtener recomendaciones basadas en las etiquetas de detección
+      const etiquetas = [...deteccion, tipo_piel, clasificacion];
+      const recomendaciones = await obtenerRecomendaciones(etiquetas);
+      setProductosRecomendados(recomendaciones);
+    } else {
+      setAnalisisResultado("❌ No se pudo realizar la predicción.");
+      setProductosRecomendados(mockProducts); // Fallback
+    }
 
     setIsAnalyzing(false);
     setDiagnosisComplete(true);
@@ -231,7 +244,7 @@ const captureImage = async () => {
 
   // Calcular total
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cart.reduce((total, item) => total + (item.precio * item.quantity), 0);
   };
 
   // Pantalla de Bienvenida
@@ -363,14 +376,14 @@ const captureImage = async () => {
               <div className="product-recommendations">
                 <h4>Productos Recomendados</h4>
                 <div className="products-grid">
-                  {mockProducts.map(product => (
+                  {productosRecomendados.map(product => (
                     <div key={product.id} className="product-card">
-                      <img src={product.image} alt={product.name} />
+                      <img src={`http://localhost:8000/static/images/${product.imagen}`} alt={product.nombre} />
                       <div className="product-info">
-                        <h5>{product.name}</h5>
-                        <p className="product-description">{product.description}</p>
+                        <h5>{product.nombre}</h5>
+                        <p className="product-description">{product.descripcion}</p>
                         <div className="product-footer">
-                          <span className="price">${product.price}</span>
+                          <span className="price">${product.precio}</span>
                           <button
                             className="add-to-cart-btn"
                             onClick={() => addToCart(product)}
@@ -435,11 +448,11 @@ const captureImage = async () => {
             <div className="cart-list">
               {cart.map(item => (
                 <div key={item.id} className="cart-item">
-                  <img src={item.image} alt={item.name} />
+                  <img src={`http://localhost:8000/static/images/${item.imagen}`} alt={item.nombre} />
                   <div className="item-details">
-                    <h4>{item.name}</h4>
-                    <p className="item-category">{item.category}</p>
-                    <p className="item-description">{item.description}</p>
+                    <h4>{item.nombre}</h4>
+                    <p className="item-category">{item.etiquetas.join(", ")}</p>
+                    <p className="item-description">{item.descripcion}</p>
                   </div>
                   <div className="item-controls">
                     <div className="quantity-controls">
@@ -455,7 +468,7 @@ const captureImage = async () => {
                       </button>
                     </div>
                     <div className="item-price">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ${(item.precio * item.quantity).toFixed(2)}
                     </div>
                     <button
                       className="remove-button"
