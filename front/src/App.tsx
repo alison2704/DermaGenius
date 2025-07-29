@@ -38,6 +38,36 @@ const mockProducts: Product[] = [
   }
 ];
 
+// Puedes agregar este componente dentro de DiagnosisScreen, antes del video
+const InstruccionesPrevias = () => (
+  <div
+    className="pre-capture-instructions"
+    style={{
+      background: 'rgba(255,255,255,0.15)', // igual que .general-tips
+      borderRadius: '1rem',
+      padding: '2rem',
+      marginBottom: '2rem',
+      color: '#222',
+      width: '100%',
+      boxSizing: 'border-box',
+    }}
+  >
+    <h4 style={{ color: '#059669', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+      📸 Instrucciones para la foto
+    </h4>
+    <ul style={{ paddingLeft: '1rem', fontSize: '1rem', lineHeight: 1.7 }}>
+      <li>😊 <b>Colócate frente a la cámara</b> y asegúrate de que tu rostro esté bien iluminado.</li>
+      <li>🧼 <b>Limpia tu rostro</b> antes de tomar la foto para mejores resultados.</li>
+      <li>👓 <b>Evita accesorios</b> como lentes, gorros o mascarillas.</li>
+      <li>🌟 <b>Mantén una expresión neutra</b> y mira hacia el frente.</li>
+      <li>📱 <b>Evita fondos oscuros</b> o muy brillantes.</li>
+    </ul>
+    <div style={{ marginTop: '1rem', color: '#059669', fontWeight: 500 }}>
+      ¡Listo para comenzar tu análisis!
+    </div>
+  </div>
+);
+
 function App() {
   const [currentScreen, setCurrentScreen] = useState<'welcome' | 'diagnosis' | 'cart'>('welcome');
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -297,111 +327,201 @@ const captureImage = async () => {
     </div>
   );
 
-  // Pantalla de Diagnóstico
-  const DiagnosisScreen = () => (
-    <div className="diagnosis-screen">
-      <div className="diagnosis-header">
-        <button
-          className="back-button"
-          onClick={() => setCurrentScreen('welcome')}
-        >
-          <ArrowLeft size={20} />
-          Volver
-        </button>
-        <h2>Análisis Dermatológico</h2>
-      </div>
+  const recomendacionesGenerales = [
+  "Lava tu rostro dos veces al día con un limpiador suave.",
+  "Usa protector solar todos los días, incluso en interiores.",
+  "Evita tocarte la cara con las manos sucias.",
+  "Mantén una dieta equilibrada y bebe suficiente agua.",
+  "No olvides hidratar tu piel según tu tipo de piel.",
+  "Evita productos abrasivos y consulta a un dermatólogo si tienes dudas.",
+];
 
-      <div className="diagnosis-content">
-        <div className="camera-section">
-          <div className="camera-container">
-            <h3>Captura tu imagen</h3>
-            {!capturedImage ? (
-        <div className="camera-preview">
-          <video ref={videoRef} autoPlay playsInline width="300" />
-          <button className="capture-button" onClick={captureImage}>
-            Capturar Imagen
-          </button>
-          <canvas ref={canvasRef} style={{ display: 'none' }} />
-        </div>
-      ) : (
+// Pantalla de Diagnóstico
+const DiagnosisScreen = () => (
+  <div className="diagnosis-screen">
+    <div className="diagnosis-header" style={{
+      background: '#111',
+      borderRadius: 'none',
+      padding: '1.5rem 2rem',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '1rem',
+      boxShadow: 'none',
+    }}>
+      <button
+        className="back-button"
+        onClick={() => setCurrentScreen('welcome')}
+        style={{
+          background: '#bbb',
+          color: '#222',
+          border: 'none',
+          borderRadius: '2rem',
+          padding: '0.5rem 1.2rem',
+          fontWeight: 'bold',
+          fontSize: '1rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          cursor: 'pointer',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+        }}
+      >
+        <ArrowLeft size={20} style={{ marginRight: '0.5rem' }} />
+        Volver
+    </button>
+    <h2 style={{
+      fontSize: '1.7rem',
+      fontWeight: 'bold',
+      color: '#fff',
+      margin: 0,
+      letterSpacing: '1px'
+    }}>
+      Análisis Dermatológico
+    </h2>
+  </div>
 
-              <div className="captured-image">
-                <img src={capturedImage} alt="Imagen capturada" />
-                <button
-                  className="retake-button"
-                  onClick={() => {
-                    setCapturedImage(null);
-                    setDiagnosisComplete(false);
-                    setIsAnalyzing(false);
-                    startCamera(); // <-- reactiva la cámara
+    <div className="diagnosis-content" style={{ display: 'flex', gap: '2rem' }}>
+      {/* Columna izquierda: cámara y resultados */}
+      <div className="camera-section" style={{ flex: 1 }}>
+        <div className="camera-container">
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+            Captura tu imagen
+          </h3>
+          {!capturedImage ? (
+            <div className="camera-preview">
+              <video ref={videoRef} autoPlay playsInline width="300" />
+              <button className="capture-button" onClick={captureImage}>
+                Capturar Imagen
+              </button>
+              <canvas ref={canvasRef} style={{ display: 'none' }} />
+            </div>
+          ) : (
+            <div className="captured-image">
+              <img src={capturedImage} alt="Imagen capturada" />
+              <button
+                className="retake-button"
+                onClick={() => {
+                  setCapturedImage(null);
+                  setDiagnosisComplete(false);
+                  setIsAnalyzing(false);
+                  startCamera();
+                }}
+              >
+                Tomar Nueva Foto
+              </button>
+            </div>
+          )}
 
-                  }}
-                >
-                  Tomar Nueva Foto
-                </button>
+          {/* Estado y resultados debajo de la cámara */}
+          <div className="analysis-status" style={{ marginTop: '2rem' }}>
+            {!capturedImage && (
+              <div className="waiting-analysis">
+                <div className="placeholder-content">
+                  <div className="pulse-animation"></div>
+                  <p>Esperando imagen para análisis...</p>
+                </div>
+              </div>
+            )}
+            {isAnalyzing && (
+              <div className="analyzing">
+                <div className="spinner"></div>
+                <p>Analizando tu piel con IA...</p>
+                <div className="progress-bar">
+                  <div className="progress-fill"></div>
+                </div>
+              </div>
+            )}
+            {diagnosisComplete && (
+              <div className="diagnosis-results">
+                <div className="diagnosis-summary analysis-completed">
+                  <h4 style={{ marginBottom: '1rem' }}>
+                    Análisis Completado
+                  </h4>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
+                    {(() => {
+                      const lines = analisisResultado.split('\n');
+                      return lines.map((line, idx) => (
+                        <li key={idx} style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginBottom: '1rem',
+                          fontSize: '1.1rem'
+                        }}>
+                          {line.includes('Edad estimada') && (
+                            <span style={{ marginRight: '0.5rem' }}>🔍</span>
+                          )}
+                          {line.includes('Análisis de piel') && (
+                            <span style={{ marginRight: '0.5rem' }}>🩺</span>
+                          )}
+                          {line.includes('Tipo de piel') && (
+                            <span style={{ marginRight: '0.5rem' }}>💧</span>
+                          )}
+                          <span>{line.replace(/^[^:]+:\s*/, '')}</span>
+                        </li>
+                      ));
+                    })()}
+                  </ul>
+                </div>
               </div>
             )}
           </div>
         </div>
+      </div>
 
-        <div className="recommendations-section">
-          <h3>Recomendaciones</h3>
-
-          {!capturedImage && (
-            <div className="waiting-analysis">
-              <div className="placeholder-content">
-                <div className="pulse-animation"></div>
-                <p>Esperando imagen para análisis...</p>
-              </div>
+      {/* Columna derecha: recomendaciones */}
+      <div className="recommendations-section" style={{ flex: 1 }}>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+          Recomendaciones
+        </h3>
+        {!diagnosisComplete ? (
+          <>
+            <InstruccionesPrevias />
+            <div className="general-tips"
+              style={{
+                background: '#fff',
+                borderRadius: '1rem',
+                padding: '2rem',
+                color: '#222',
+                marginBottom: '2rem'
+              }}>
+              <h4 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#059669' }}>
+                Consejos para cuidar tu piel
+              </h4>
+              <ul style={{ textAlign: 'left', marginTop: '1rem' }}>
+                <li style={{ marginBottom: '0.75rem' }}>Lava tu rostro dos veces al día con un limpiador suave. 🧼</li>
+                <li style={{ marginBottom: '0.75rem' }}>Usa protector solar todos los días, incluso en interiores. 🌞</li>
+                <li style={{ marginBottom: '0.75rem' }}>Evita tocarte la cara con las manos sucias. 🙅‍♂️</li>
+                <li style={{ marginBottom: '0.75rem' }}>Mantén una dieta equilibrada y bebe suficiente agua. 💧</li>
+                <li style={{ marginBottom: '0.75rem' }}>No olvides hidratar tu piel según tu tipo de piel. 🧴</li>
+                <li style={{ marginBottom: '0.75rem' }}>Evita productos abrasivos y consulta a un dermatólogo si tienes dudas. 🩺</li>
+              </ul>
             </div>
-          )}
-
-          {isAnalyzing && (
-            <div className="analyzing">
-              <div className="spinner"></div>
-              <p>Analizando tu piel con IA...</p>
-              <div className="progress-bar">
-                <div className="progress-fill"></div>
-              </div>
-            </div>
-          )}
-
-          {diagnosisComplete && (
-            <div className="diagnosis-results">
-              <div className="diagnosis-summary">
-                <h4>Análisis Completado</h4>
-                <p>{analisisResultado}</p>
-              </div>
-
-              <div className="product-recommendations">
-                <h4>Productos Recomendados</h4>
-                <div className="products-grid">
-                  {productosRecomendados.map(product => (
-                    <div key={product.id} className="product-card">
-                      <img src={`http://localhost:8000/static/images/${product.imagen}`} alt={product.nombre} />
-                      <div className="product-info">
-                        <h5>{product.nombre}</h5>
-                        <p className="product-description">{product.descripcion}</p>
-                        <div className="product-footer">
-                          <span className="price">${product.precio}</span>
-                          <button
-                            className="add-to-cart-btn"
-                            onClick={() => addToCart(product)}
-                          >
-                            <Plus size={16} />
-                            Agregar
-                          </button>
-                        </div>
-                      </div>
+          </>
+        ) : (
+          <div className="product-recommendations">
+            <h4>Productos Recomendados</h4>
+            <div className="products-grid">
+              {productosRecomendados.map(product => (
+                <div key={product.id} className="product-card">
+                  <img src={`http://localhost:8000/static/images/${product.imagen}`} alt={product.nombre} />
+                  <div className="product-info">
+                    <h5>{product.nombre}</h5>
+                    <p className="product-description">{product.descripcion}</p>
+                    <div className="product-footer">
+                      <span className="price">${product.precio}</span>
+                      <button
+                        className="add-to-cart-btn"
+                        onClick={() => addToCart(product)}
+                      >
+                        <Plus size={16} />
+                        Agregar
+                      </button>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          )}
-
-          {diagnosisComplete && (
-            <div className="go-to-cart">
+            <div className="go-to-cart" style={{ marginTop: '2rem' }}>
               <button
                 className="cart-button"
                 onClick={() => setCurrentScreen('cart')}
@@ -410,102 +530,103 @@ const captureImage = async () => {
                 Ver Carrito ({cart.length})
               </button>
             </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-  // Pantalla del Carrito
-  const CartScreen = () => (
-    <div className="cart-screen">
-      <div className="cart-header">
-        <button
-          className="back-button"
-          onClick={() => setCurrentScreen('diagnosis')}
-        >
-          <ArrowLeft size={20} />
-          Volver
-        </button>
-        <h2>Carrito de Compras</h2>
-      </div>
-
-      <div className="cart-content">
-        {cart.length === 0 ? (
-          <div className="empty-cart">
-            <ShoppingCart size={64} />
-            <h3>Tu carrito está vacío</h3>
-            <p>Agrega productos desde la pantalla de diagnóstico</p>
-            <button
-              className="continue-shopping"
-              onClick={() => setCurrentScreen('diagnosis')}
-            >
-              Continuar Comprando
-            </button>
-          </div>
-        ) : (
-          <div className="cart-items">
-            <div className="cart-list">
-              {cart.map(item => (
-                <div key={item.id} className="cart-item">
-                  <img src={`http://localhost:8000/static/images/${item.imagen}`} alt={item.nombre} />
-                  <div className="item-details">
-                    <h4>{item.nombre}</h4>
-                    <p className="item-category">{item.etiquetas.join(", ")}</p>
-                    <p className="item-description">{item.descripcion}</p>
-                  </div>
-                  <div className="item-controls">
-                    <div className="quantity-controls">
-                      <button
-                        onClick={() => updateQuantity(item.id, -1)}
-                        disabled={item.quantity <= 1}
-                      >
-                        <Minus size={16} />
-                      </button>
-                      <span className="quantity">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, 1)}>
-                        <Plus size={16} />
-                      </button>
-                    </div>
-                    <div className="item-price">
-                      ${(item.precio * item.quantity).toFixed(2)}
-                    </div>
-                    <button
-                      className="remove-button"
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="cart-summary">
-              <div className="total-section">
-                <h3>Resumen del Pedido</h3>
-                <div className="total-line">
-                  <span>Subtotal:</span>
-                  <span>${calculateTotal().toFixed(2)}</span>
-                </div>
-                <div className="total-line">
-                  <span>Envío:</span>
-                  <span>Gratis</span>
-                </div>
-                <div className="total-line total">
-                  <span>Total:</span>
-                  <span>${calculateTotal().toFixed(2)}</span>
-                </div>
-                <button className="checkout-button">
-                  Proceder al Pago
-                </button>
-              </div>
-            </div>
           </div>
         )}
       </div>
     </div>
-  );
+  </div>
+);
+
+    // Pantalla del Carrito
+    const CartScreen = () => (
+      <div className="cart-screen">
+        <div className="cart-header">
+          <button
+            className="back-button"
+            onClick={() => setCurrentScreen('diagnosis')}
+          >
+            <ArrowLeft size={20} />
+            Volver
+          </button>
+          <h2>Carrito de Compras</h2>
+        </div>
+
+        <div className="cart-content">
+          {cart.length === 0 ? (
+            <div className="empty-cart">
+              <ShoppingCart size={64} />
+              <h3>Tu carrito está vacío</h3>
+              <p>Agrega productos desde la pantalla de diagnóstico</p>
+              <button
+                className="continue-shopping"
+                onClick={() => setCurrentScreen('diagnosis')}
+              >
+                Continuar Comprando
+              </button>
+            </div>
+          ) : (
+            <div className="cart-items">
+              <div className="cart-list">
+                {cart.map(item => (
+                  <div key={item.id} className="cart-item">
+                    <img src={`http://localhost:8000/static/images/${item.imagen}`} alt={item.nombre} />
+                    <div className="item-details">
+                      <h4>{item.nombre}</h4>
+                      <p className="item-category">{item.etiquetas.join(", ")}</p>
+                      <p className="item-description">{item.descripcion}</p>
+                    </div>
+                    <div className="item-controls">
+                      <div className="quantity-controls">
+                        <button
+                          onClick={() => updateQuantity(item.id, -1)}
+                          disabled={item.quantity <= 1}
+                        >
+                          <Minus size={16} />
+                        </button>
+                        <span className="quantity">{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, 1)}>
+                          <Plus size={16} />
+                        </button>
+                      </div>
+                      <div className="item-price">
+                        ${(item.precio * item.quantity).toFixed(2)}
+                      </div>
+                      <button
+                        className="remove-button"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="cart-summary">
+                <div className="total-section">
+                  <h3>Resumen del Pedido</h3>
+                  <div className="total-line">
+                    <span>Subtotal:</span>
+                    <span>${calculateTotal().toFixed(2)}</span>
+                  </div>
+                  <div className="total-line">
+                    <span>Envío:</span>
+                    <span>Gratis</span>
+                  </div>
+                  <div className="total-line total">
+                    <span>Total:</span>
+                    <span>${calculateTotal().toFixed(2)}</span>
+                  </div>
+                  <button className="checkout-button">
+                    Proceder al Pago
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
 
   // Renderizar la pantalla actual
   const renderCurrentScreen = () => {

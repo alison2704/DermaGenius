@@ -196,24 +196,68 @@ cambiar fondo de pantalla */
 
 /*aqui*/
 .diagnosis-content {
-  background: var(--gradient-secondary);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex !important;
   min-height: calc(100vh - 100px);
+  gap: 0;
 }
 
-/*aqui*/
+
+.camera-section,
+.camera-container {
+  background: #fff !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 3rem 0 !important;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .camera-section {
-  padding: 2rem;
-  background: var(--background-secondary);
-  border-right: 1px solid var(--border-color);
+  flex: 1 1 50%;
+  max-width: 50vw;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  background: #fff !important;
+  height: 100vh;
+}
+
+.recommendations-section {
+  flex: 1 1 0;
+  width: 50vw;
+  max-width: 50vw;
+  min-width: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0;
+  border-radius: 0 !important;
+  overflow-y: auto;
+}
+
+/* El contenido interno de recomendaciones tiene margen y padding suficiente */
+.general-tips {
+  background: #fff !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  border-radius: 1rem;
+  padding: 2rem 2.5rem;
+  margin: 2rem auto;
+  max-width: 95%;
 }
 
 .camera-container h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
   margin-bottom: 1.5rem;
-  background: var(--gradient-secondary);
+}
+
+/* Instrucciones previas: fondo suave */
+.pre-capture-instructions {
+  background: #f4f8ff !important;
 }
 
 .camera-placeholder {
@@ -250,19 +294,19 @@ cambiar fondo de pantalla */
 
 
 .capture-button {
-  background: var(--text-light);
-  color: white;
+  background: #222;
+  color: #fff;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  margin-top: 1rem;
+  font-size: 1rem;
+  transition: background 0.3s;
 }
-
 .capture-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
+  background: var(--secondary-color);
 }
 
 .captured-image {
@@ -283,17 +327,19 @@ cambiar fondo de pantalla */
 }
 
 .retake-button {
-  background: var(--text-light);
-  color: white;
+  background: #222;
+  color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  margin-top: 1rem;
+  font-size: 1rem;
+  transition: background 0.3s;
 }
-
 .retake-button:hover {
-  background: var(--text-secondary);
+  background: var(--secondary-color);
 }
 
 .recommendations-section {
@@ -324,7 +370,7 @@ cambiar fondo de pantalla */
 .pulse-animation {
   width: 4rem;
   height: 4rem;
-  background: var(--text-light);
+  background: var(--secondary-light);
   border-radius: 50%;
   margin: 0 auto 1rem;
   animation: pulse 2s infinite;
@@ -411,8 +457,10 @@ cambiar fondo de pantalla */
 }
 
 .product-recommendations h4 {
-  margin-bottom: 1rem;
   color: var(--text-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
 }
 
 .products-grid {
@@ -774,5 +822,64 @@ aqui*/
   
   .products-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+  /* Fondo blanco para la sección de captura de imagen */
+.camera-container {
+  background: #fff !important;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-light);
+  padding: 2rem 0;
+}
+
+/* Título y textos en negro */
+.camera-container h3,
+.waiting-analysis p {
+  color: #222 !important;
+}
+
+/* Recuadro de análisis completado: fondo verde, texto blanco, armónico */
+.diagnosis-summary.analysis-completed {
+  background: var(--secondary-color) !important;
+  color: #fff !important;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  max-width: 500px;
+  margin: 2rem auto 0 auto;
+}
+.diagnosis-summary.analysis-completed h4 {
+  color:rgb(0, 0, 0);
+  font-size: 1.5rem;           /* Más grande */
+  font-weight: 700;          /* Negrita, pero menos que recomendaciones */
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+.diagnosis-summary.analysis-completed ul {
+  color: rgb(0, 0, 0) !important;
+}
+.diagnosis-summary.analysis-completed li span {
+  font-weight: 500;          /* Predicciones en negrita */
+}
+
+
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .diagnosis-content {
+    flex-direction: column !important;
+  }
+  .camera-section,
+  .recommendations-section {
+    max-width: 100vw;
+    min-width: 100vw;
+    height: auto;
+    padding: 0;
+  }
+  .general-tips {
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+    max-width: 100%;
   }
 }
