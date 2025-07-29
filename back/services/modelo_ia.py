@@ -45,6 +45,24 @@ class ModeloIA:
 
         # Mapeo de índices a etiquetas
         self.etiquetas_tipo_piel = ["seca", "normal", "grasa"]  # mapea dry→seca, normal→normal, oily→grasa
+        # Mapeo de etiquetas del modelo a etiquetas de productos
+        self.mapeo_edad = {
+            # Aquí debes ajustar según las etiquetas que realmente devuelve tu modelo YOLO de edad
+            "0-12": "0-12",
+            "13-18": "13-18", 
+            "19-30": "19-30",
+            "31-45": "31-50",  # Si tienes más rangos
+            "46+": "60+",
+            "61+": "61+",       # Si tienes más rangos
+            # Agregar más mapeos según los nombres reales de tu modelo
+        }
+
+        self.mapeo_afecciones = {
+            # Mapeo de detecciones YOLO a etiquetas de productos
+            "acne": "acne",
+            "arrugas": "arrugas",
+            # Agregar más mapeos según tu modelo YOLO de piel
+        }
 
     
     def predecir(self, imagen_bytes):
@@ -74,8 +92,27 @@ class ModeloIA:
             pred = torch.argmax(salida, dim=1).item()
             etiqueta_tipo = self.etiquetas_tipo_piel[pred]
 
+        # Mapear etiquetas para recomendación de productos
+        etiquetas_mapeadas = []
+        
+        # Mapear edad
+        if etiqueta_edad in self.mapeo_edad:
+            etiquetas_mapeadas.append(self.mapeo_edad[etiqueta_edad])
+        
+        # Mapear tipo de piel
+        etiquetas_mapeadas.append(etiqueta_tipo)
+        
+        # Mapear afecciones de piel
+        for etiqueta in etiquetas_piel:
+            if etiqueta.lower() in self.mapeo_afecciones:
+                etiquetas_mapeadas.append(self.mapeo_afecciones[etiqueta.lower()])
+
+        # Eliminar duplicados manteniendo el orden
+        etiquetas_mapeadas = list(dict.fromkeys(etiquetas_mapeadas))
+
         return {
             "clasificacion": etiqueta_edad,
             "deteccion": etiquetas_piel,
-            "tipo_piel": etiqueta_tipo
+            "tipo_piel": etiqueta_tipo,
+            "etiquetas_productos": etiquetas_mapeadas  # Nuevas etiquetas para recomendación
         }

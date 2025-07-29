@@ -3,7 +3,7 @@
     "id": 1,
     "nombre": "GEL LIMPIADOR DE TE VERDE",
     "descripcion": "Gel ligero enriquecido con té verde que limpia y purifica la piel dejándola libre de grasa e impurezas.",
-    "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
+    "etiquetas": ["0-12", "19-30", "grasa", "acne"],
     "imagen": "ID1.png",
     "precio": 28.00
   },
@@ -12,7 +12,7 @@
     "id": 2,
     "nombre": "GEL ANTI-ACNÉ",
     "descripcion": "Antiacné es un tratamiento nocturno.",
-    "etiquetas": ["acne"],
+    "etiquetas": ["acne","grasa"],
     "imagen": "ID2.png",
     "precio": 32.00
   },
@@ -33,6 +33,24 @@
     "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
     "imagen": "ID4.png",
     "precio": 20
+  },
+
+  {
+    "id": 5,
+    "nombre": "CREMA HIDRATANTE PIEL SECA",
+    "descripcion": "Crema nutritiva especialmente formulada para pieles secas con ingredientes humectantes.",
+    "etiquetas": ["normal", "19-30", "31-50"],
+    "imagen": "ID5.png",
+    "precio": 35.00
+  },
+
+  {
+    "id": 6,
+    "nombre": "LOCIÓN PIEL NORMAL",
+    "descripcion": "Loción equilibrante para mantener la piel normal hidratada y saludable.",
+    "etiquetas": ["acne", "19-30"],
+    "imagen": "ID6.png",
+    "precio": 22.50
   }
 
 ] 

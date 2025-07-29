@@ -1,7 +1,8 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from back.routes import image_routes, product_routes
 from fastapi.middleware.cors import CORSMiddleware
-
+import os
 
 app = FastAPI(
     title="Modelo IA",
@@ -22,6 +23,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+# Configurar archivos estáticos para servir imágenes
+static_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+app.mount("/static", StaticFiles(directory=static_path), name="static")
 
 #app.include_router(basic_routes.router)
 #app.include_router(get_resources.router)
