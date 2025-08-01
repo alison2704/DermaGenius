@@ -85,6 +85,24 @@ class ModeloIA:
         etiquetas_piel = [resultado_piel.names[int(cls)] for cls in resultado_piel.boxes.cls]
         etiquetas_piel = list(set(etiquetas_piel))  # Quitar duplicados
 
+        # Obtener coordenadas de las cajas de detección de piel
+        cajas_deteccion = []
+        if len(resultado_piel.boxes.xyxy) > 0:
+            for i, (box, cls, conf) in enumerate(zip(resultado_piel.boxes.xyxy, resultado_piel.boxes.cls, resultado_piel.boxes.conf)):
+                x1, y1, x2, y2 = box.tolist()
+                clase = int(cls)
+                etiqueta = resultado_piel.names[clase]
+                confianza = float(conf)
+                
+                cajas_deteccion.append({
+                    "x1": x1,
+                    "y1": y1,
+                    "x2": x2,
+                    "y2": y2,
+                    "etiqueta": etiqueta,
+                    "confianza": confianza
+                })
+
         # ResNet‑18 Tipo de piel
         tensor = self.transform_tipo_piel(imagen).unsqueeze(0)
         with torch.no_grad():
@@ -113,6 +131,7 @@ class ModeloIA:
         return {
             "clasificacion": etiqueta_edad,
             "deteccion": etiquetas_piel,
+            "cajas_deteccion": cajas_deteccion,  # Nuevo campo con coordenadas
             "tipo_piel": etiqueta_tipo,
             "etiquetas_productos": etiquetas_mapeadas  # Nuevas etiquetas para recomendación
         }
