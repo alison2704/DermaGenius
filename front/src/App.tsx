@@ -78,6 +78,7 @@ function App() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [analisisResultado, setAnalisisResultado] = useState<string>("");
   const [productosRecomendados, setProductosRecomendados] = useState<Product[]>([]);
+  const [cajasDeteccion, setCajasDeteccion] = useState<any[]>([]);
 
 
   // Inicializa la cámara al cargar la pantalla de diagnóstico
@@ -203,7 +204,7 @@ const captureImage = async () => {
     const resultado = await enviarImagenAlBackend(blob);
 
     if (resultado) {
-      const { clasificacion, deteccion, tipo_piel } = resultado;
+      const { clasificacion, deteccion, tipo_piel, cajas_deteccion } = resultado;
 
       const detecciones = deteccion.length > 0
         ? deteccion.join(", ")
@@ -214,6 +215,9 @@ const captureImage = async () => {
         `🩺 Análisis de piel: ${detecciones}.\n` +
         `💧 Tipo de piel: ${tipo_piel}.`
       );
+
+      // Guardar las cajas de detección para mostrarlas en la imagen
+      setCajasDeteccion(cajas_deteccion || []);
 
       // Obtener recomendaciones basadas en las etiquetas de detección
       const etiquetas = [...deteccion, tipo_piel, clasificacion];
@@ -395,15 +399,16 @@ const DiagnosisScreen = () => (
               </button>
               <canvas ref={canvasRef} style={{ display: 'none' }} />
             </div>
-          ) : (
-            <div className="captured-image">
-              <img src={capturedImage} alt="Imagen capturada" />
+                              ) : (
+                      <div className="captured-image">
+                        <img src={capturedImage} alt="Imagen capturada" />
               <button
                 className="retake-button"
                 onClick={() => {
                   setCapturedImage(null);
                   setDiagnosisComplete(false);
                   setIsAnalyzing(false);
+                  setCajasDeteccion([]);
                   startCamera();
                 }}
               >
@@ -462,6 +467,86 @@ const DiagnosisScreen = () => (
                     })()}
                   </ul>
                 </div>
+                
+                {/* Resumen de detecciones YOLO */}
+                {cajasDeteccion.length > 0 && (
+                  <div className="detection-summary" style={{
+                    background: '#fff',
+                    borderRadius: '1rem',
+                    padding: '1.5rem',
+                    marginTop: '1rem',
+                    border: '2px solid #ff4444'
+                  }}>
+                    <h4 style={{ 
+                      color: '#ff4444', 
+                      fontSize: '1.2rem', 
+                      fontWeight: 'bold', 
+                      marginBottom: '1rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem'
+                    }}>
+                      🎯 Detecciones de Afecciones
+                    </h4>
+                    
+                    {/* Imagen única con todos los boxes */}
+                    <div className="detection-main-image">
+                      <div style={{ position: 'relative', display: 'inline-block' }}>
+                        <img 
+                          src={capturedImage ?? ''} 
+                          alt="Detección de afecciones"
+                          style={{ 
+                            width: '200px', 
+                            height: '200px', 
+                            objectFit: 'cover',
+                            borderRadius: '8px'
+                          }} 
+                        />
+                        {/* Todos los boxes en una sola imagen */}
+                        {cajasDeteccion.map((caja, index) => (
+                          <div
+                            key={index}
+                            className="detection-box-main"
+                            style={{
+                              left: `${(caja.x1 / 256) * 100}%`,
+                              top: `${(caja.y1 / 256) * 100}%`,
+                              width: `${((caja.x2 - caja.x1) / 256) * 100}%`,
+                              height: `${((caja.y2 - caja.y1) / 256) * 100}%`
+                            }}
+                          >
+                            <div className="detection-label-main">
+                              {caja.etiqueta}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Lista de detecciones individuales */}
+                    <div style={{ display: 'grid', gap: '0.5rem', marginTop: '1rem' }}>
+                      {cajasDeteccion.map((caja, index) => (
+                        <div key={index} className="detection-item">
+                          <div className="detection-info">
+                            <span style={{ fontWeight: 'bold', color: '#ff4444' }}>
+                              {caja.etiqueta}
+                            </span>
+                            <span className="detection-confidence">
+                              {(caja.confianza * 100).toFixed(1)}%
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <p style={{ 
+                      marginTop: '1rem', 
+                      fontSize: '0.9rem', 
+                      color: '#666',
+                      fontStyle: 'italic'
+                    }}>
+                      Las cajas rojas en la imagen indican las áreas donde se detectaron afecciones de piel.
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </div>
