@@ -53,14 +53,14 @@ const InstruccionesPrevias = () => (
     }}
   >
     <h4 style={{ color: '#059669', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-      📸 Instrucciones para la foto
+       Instrucciones para la foto
     </h4>
     <ul style={{ paddingLeft: '1rem', fontSize: '1rem', lineHeight: 1.7 }}>
-      <li>😊 <b>Colócate frente a la cámara</b> y asegúrate de que tu rostro esté bien iluminado.</li>
-      <li>🧼 <b>Limpia tu rostro</b> antes de tomar la foto para mejores resultados.</li>
-      <li>👓 <b>Evita accesorios</b> como lentes, gorros o mascarillas.</li>
-      <li>🌟 <b>Mantén una expresión neutra</b> y mira hacia el frente.</li>
-      <li>📱 <b>Evita fondos oscuros</b> o muy brillantes.</li>
+      <li> <b>Colócate frente a la cámara</b> y asegúrate de que tu rostro esté bien iluminado.</li>
+      <li> <b>Limpia tu rostro</b> antes de tomar la foto para mejores resultados.</li>
+      <li> <b>Evita accesorios</b> como lentes, gorros o mascarillas.</li>
+      <li> <b>Mantén una expresión neutra</b> y mira hacia el frente.</li>
+      <li> <b>Evita fondos oscuros</b> o muy brillantes.</li>
     </ul>
     <div style={{ marginTop: '1rem', color: '#059669', fontWeight: 500 }}>
       ¡Listo para comenzar tu análisis!
@@ -344,39 +344,25 @@ const captureImage = async () => {
 const DiagnosisScreen = () => (
   <div className="diagnosis-screen">
     <div className="diagnosis-header" style={{
-      background: '#111',
+      background: 'var(--gradient-secondary);',
       borderRadius: 'none',
-      padding: '1.5rem 2rem',
+      padding: '0.1rem 1.5rem',
       display: 'flex',
       alignItems: 'center',
       gap: '1rem',
       boxShadow: 'none',
     }}>
-      <button
-        className="back-button"
-        onClick={() => setCurrentScreen('welcome')}
-        style={{
-          background: '#bbb',
-          color: '#222',
-          border: 'none',
-          borderRadius: '2rem',
-          padding: '0.5rem 1.2rem',
-          fontWeight: 'bold',
-          fontSize: '1rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          cursor: 'pointer',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-        }}
-      >
-        <ArrowLeft size={20} style={{ marginRight: '0.5rem' }} />
-        Volver
-    </button>
+          <button
+            className="back-button"
+            onClick={() => setCurrentScreen('welcome')}
+          >
+            <ArrowLeft size={20} />
+            Volver
+          </button>
     <h2 style={{
       fontSize: '1.7rem',
       fontWeight: 'bold',
-      color: '#fff',
+      color: '#black',
       margin: 0,
       letterSpacing: '1px'
     }}>
@@ -388,9 +374,10 @@ const DiagnosisScreen = () => (
       {/* Columna izquierda: cámara y resultados */}
       <div className="camera-section" style={{ flex: 1 }}>
         <div className="camera-container">
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', textAlign: 'center' }}>
             Captura tu imagen
           </h3>
+
           {!capturedImage ? (
             <div className="camera-preview">
               <video ref={videoRef} autoPlay playsInline width="300" />
@@ -556,7 +543,7 @@ const DiagnosisScreen = () => (
       {/* Columna derecha: recomendaciones */}
       <div className="recommendations-section" style={{ flex: 1 }}>
         <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-          Recomendaciones
+          
         </h3>
         {!diagnosisComplete ? (
           <>
@@ -573,12 +560,12 @@ const DiagnosisScreen = () => (
                 Consejos para cuidar tu piel
               </h4>
               <ul style={{ textAlign: 'left', marginTop: '1rem' }}>
-                <li style={{ marginBottom: '0.75rem' }}>Lava tu rostro dos veces al día con un limpiador suave. 🧼</li>
-                <li style={{ marginBottom: '0.75rem' }}>Usa protector solar todos los días, incluso en interiores. 🌞</li>
-                <li style={{ marginBottom: '0.75rem' }}>Evita tocarte la cara con las manos sucias. 🙅‍♂️</li>
-                <li style={{ marginBottom: '0.75rem' }}>Mantén una dieta equilibrada y bebe suficiente agua. 💧</li>
-                <li style={{ marginBottom: '0.75rem' }}>No olvides hidratar tu piel según tu tipo de piel. 🧴</li>
-                <li style={{ marginBottom: '0.75rem' }}>Evita productos abrasivos y consulta a un dermatólogo si tienes dudas. 🩺</li>
+                <li style={{ marginBottom: '0.75rem' }}>Lava tu rostro dos veces al día con un limpiador suave. </li>
+                <li style={{ marginBottom: '0.75rem' }}>Usa protector solar todos los días, incluso en interiores. </li>
+                <li style={{ marginBottom: '0.75rem' }}>Evita tocarte la cara con las manos sucias. </li>
+                <li style={{ marginBottom: '0.75rem' }}>Mantén una dieta equilibrada y bebe suficiente agua. </li>
+                <li style={{ marginBottom: '0.75rem' }}>No olvides hidratar tu piel según tu tipo de piel. </li>
+                <li style={{ marginBottom: '0.75rem' }}>Evita productos abrasivos y consulta a un dermatólogo si tienes dudas. </li>
               </ul>
             </div>
           </>
