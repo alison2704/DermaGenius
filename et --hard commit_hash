@@ -1,0 +1,98 @@
+[33mcommit c8514091ebae855686448bb4cf336af461bf1eee[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32magregacionProducto2[m[33m)[m
+Merge: 5cba5 1b5f2
+Author: Evelin Rocha <evelin.rocha@epn.edu.ec>
+Date:   Fri Aug 1 16:23:47 2025 -0500
+
+    Merge branch 'arreglosFrontend' into agregacionProducto2
+
+[33mcommit 5cba57b46dcb8f31f89a228ed82fbc7641a32441[m[33m ([m[1;31morigin/agregacionProducto2[m[33m)[m
+Author: Evelin Rocha <evelin.rocha@epn.edu.ec>
+Date:   Fri Aug 1 16:06:04 2025 -0500
+
+    Adicion de los productos
+
+[33mcommit 1b5f2281094c34943cd4c7fa61b415bf078a769e[m[33m ([m[1;31morigin/arreglosFrontend[m[33m, [m[1;32marreglosFrontend[m[33m)[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Tue Jul 29 11:30:01 2025 -0500
+
+    Arreglos de front
+
+[33mcommit 6b4dc73b75baf9b4b1245993d6f5451817f96e15[m
+Author: Evelin Rocha <evelin.rocha@epn.edu.ec>
+Date:   Mon Jul 28 22:10:44 2025 -0500
+
+    Logica implementada para etiqetass en productos
+
+[33mcommit a6d820b24160642a66972e0f0e92c547a418fb73[m[33m ([m[1;31morigin/agregacionproductos[m[33m, [m[1;32magregacionproductos[m[33m)[m
+Author: lalabell-a <ihavequestion29@gmail.com>
+Date:   Mon Jul 28 12:06:18 2025 -0500
+
+    Version con productos recomendados
+
+[33mcommit 379468f1a683e2dfd95122f79a6ffc9b4ef694ad[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 988d5 25926
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 15:42:13 2025 -0500
+
+    Arreglar el conflicto por archivos compilados
+
+[33mcommit 259264f3398ca369e4f17ef9b931b853ec0293f7[m[33m ([m[1;31morigin/modeloTipoPiel[m[33m, [m[1;32mmodeloTipoPiel[m[33m)[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 15:24:31 2025 -0500
+
+    Modelo tipo de piel para la parte del front funcional
+
+[33mcommit 1e54dcdb28d1564ac4fb66a4ff149d8cb71c9084[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 14:40:14 2025 -0500
+
+    Modelo tipo de Piel en back listo
+
+[33mcommit 67f9ba722bb92ef8040b4f2eba08899eb0d19233[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 13:56:26 2025 -0500
+
+    Modelo de tipo de piel anadido y cambio de la descripcion para la documentacion
+
+[33mcommit 988d5e70debfedd8be83c43355b183c9a6f1d440[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 13:53:22 2025 -0500
+
+    Removed __pycache__ and updated .gitignore
+
+[33mcommit bc832fff3594edd0d45708ba2de586a43edb8924[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 13:38:35 2025 -0500
+
+    Actualizar .gitignore y eliminar estructura.txt
+
+[33mcommit 8695878b5a871096ba7f6c94c0cd2024d5e745cb[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 13:34:58 2025 -0500
+
+    Dependencias escritas por generalizacion e ignorar mi entorno cirtual
+
+[33mcommit c46cc50df98643e5334206ca304ef68e173c1115[m
+Merge: 9a2fd 4f6c9
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 11:17:18 2025 -0500
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 9a2fdc3bb6bddd2b77242932898a972390a58f82[m
+Author: Alison Betancourt <alison.betancourt01@epn.edu.ec>
+Date:   Thu Jul 24 11:17:14 2025 -0500
+
+    Mis cambios locales en main.py
+
+[33mcommit 4f6c9dd441eeb8d8b11635ef341e84a3490d638b[m
+Author: lalabell-a <ihavequestion29@gmail.com>
+Date:   Wed Jul 23 19:05:47 2025 -0500
+
+    agregacion modelo piel, cambio edad, eliminacion routes
+
+[33mcommit a75b4984b3492e4e973e61b3cc3ab45ceb2d656d[m
+Author: Katiuska <alison.lita@epn.edu.ec>
+Date:   Tue Jul 22 22:51:38 2025 -0500
+
+    Primer commit
