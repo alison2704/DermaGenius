@@ -1,31 +1,16 @@
 [
   {
     "id": 1,
-<<<<<<< Updated upstream
-    "nombre": "GEL LIMPIADOR DE TE VERDE",
-    "descripcion": "Gel ligero enriquecido con té verde que limpia y purifica la piel dejándola libre de grasa e impurezas.",
-    "etiquetas": ["0-12", "19-30", "grasa", "acne"],
-    "imagen": "ID1.png",
-    "precio": 28.00
-=======
     "nombre": "Défense Total Protector Solar Hidratación Rostro FPS50 con Color 30ml",
     "descripcion": "Protector Facial Diario no Grasoso en Loción FPS 50 Color Naturelle.",
     "etiquetas": ["31-45","46-60", "61+","normal"],
     "imagen": "ID1N.png",
     "precio": 17.41
->>>>>>> Stashed changes
   },
   
 
   {
     "id": 2,
-<<<<<<< Updated upstream
-    "nombre": "GEL ANTI-ACNÉ",
-    "descripcion": "Antiacné es un tratamiento nocturno.",
-    "etiquetas": ["acne","grasa"],
-    "imagen": "ID2.png",
-    "precio": 32.00
-=======
     "nombre": "Essential Agua Micelar Efecto 180ml.",
     "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
     "etiquetas": ["31-45","normal"],
@@ -55,19 +40,10 @@
     "etiquetas": ["13-18", "grasa"],
     "imagen": "ID2N.png",
     "precio": 11.38
->>>>>>> Stashed changes
   },
 
 
   {
-<<<<<<< Updated upstream
-    "id": 3,
-    "nombre": "TÓNICO FACIAL TÉ VERDE",
-    "descripcion": "Para piel grasa, antioxidante de amplio espectro para sus propiedades desinflamantes útil para pieles acneicas y humectante.",
-    "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
-    "imagen": "ID3.png",
-    "precio": 18.75
-=======
     "id": 6,
     "nombre": "Crema Nutritiva para el rostro Concentré Total 15",
     "descripcion": "Concentrado antiedad facial en crema con quince beneficios. 50g (8.6 x 9.7 x 7.1 cm) NSOC33885-24CO.",
@@ -82,37 +58,10 @@
     "etiquetas": ["31-45","normal"],
     "imagen": "ID3N.png",
     "precio": 38.58
->>>>>>> Stashed changes
   },
 
 
   {
-<<<<<<< Updated upstream
-    "id": 4,
-    "nombre": "Photoderm AKN MAT SPF30",
-    "descripcion": "Piel con tendencia acneica Piel mixta grasa",
-    "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
-    "imagen": "ID4.png",
-    "precio": 20
-  },
-
-  {
-    "id": 5,
-    "nombre": "CREMA HIDRATANTE PIEL SECA",
-    "descripcion": "Crema nutritiva especialmente formulada para pieles secas con ingredientes humectantes.",
-    "etiquetas": ["normal", "19-30", "31-50"],
-    "imagen": "ID5.png",
-    "precio": 35.00
-  },
-
-  {
-    "id": 6,
-    "nombre": "LOCIÓN PIEL NORMAL",
-    "descripcion": "Loción equilibrante para mantener la piel normal hidratada y saludable.",
-    "etiquetas": ["acne", "19-30"],
-    "imagen": "ID6.png",
-    "precio": 22.50
-=======
     "id": 8,
     "nombre": "Defense Total Bloqueador Facial Anti-Edad FPS50",
     "descripcion": "Un protector solar facial anti-fotoenvejecimiento con protectores de colágeno, que otorga 24H de hidratación intensa con una textura ultraligera y acción antioxidante",
@@ -193,7 +142,7 @@
     "precio": 22.10
   },
   {
-    "id": 17,
+    "id": 9,
     "nombre": "Sérum Spécialiste Anti-Oleosidad",
     "descripcion": "Sérum Intensivo Anti-Imperfecciones 28 ml e .94 fl. oz.(4.15 x 4.15 x 12.3 cm) NSOC22664-23CO.",
     "etiquetas": ["31-45", "46-60","61+","grasa"],
@@ -201,7 +150,7 @@
     "precio": 33.48
   },
   {
-    "id": 18,
+    "id": 10,
     "nombre": "Sérum Reductor de Arrugas con Ácido Hialurónico",
     "descripcion": "Sérum intensivo reductor de la apariencia de arrugas. 30ml e 1fl. oz.(4.15 x 4.15 x 12.3 cm) NSOC29578-24CO.",
     "etiquetas": ["31-45", "46-60","61+","arrugas"],
@@ -209,7 +158,7 @@
     "precio": 34.16
   },
   {
-    "id": 19,
+    "id": 11,
     "nombre": "Sérum antiarrugas profundas y firmeza con Retinol",
     "descripcion": "Suero Intensivo Nocturno Antiarrugas y Mejoría de Firmeza 27 ml e 1 fl.oz. (4.15 x 4.15 x 12.3 cm) NSOC34499-24CO.",
     "etiquetas": ["31-45", "46-60","61+","arrugas"],
@@ -218,7 +167,7 @@
   },
 
   {
-    "id": 20,
+    "id": 12,
     "nombre": "Concentrado Antiedad Nocturne con Ácido Hialurónico 30 ml",
     "descripcion": "Concentrado antiedad de renovación nocturna para el rostro. 30 ml e 1 fl. Oz.",
     "etiquetas": ["31-45", "46-60","61+","arrugas"],
@@ -227,13 +176,22 @@
   },
 
   {
-    "id": 21,
+    "id": 13,
     "nombre": "Essential Agua Micelar Efecto Antiedad 180ml.",
     "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
     "etiquetas": ["31-45", "normal","seca","grasa"],
     "imagen": "ID2N.png",
     "precio": 11.38
->>>>>>> Stashed changes
+  },
+   {
+    "id": 14,
+    "nombre": "Essential Agua Micelar Efecto Antiedad 180ml.",
+    "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
+    "etiquetas": ["31-45", "normal","seca","grasa"],
+    "imagen": "ID2N.png",
+    "precio": 11.38
   }
+
+
 
 ] 
