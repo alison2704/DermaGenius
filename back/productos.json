@@ -1,32 +1,93 @@
 [
   {
     "id": 1,
+<<<<<<< Updated upstream
     "nombre": "GEL LIMPIADOR DE TE VERDE",
     "descripcion": "Gel ligero enriquecido con té verde que limpia y purifica la piel dejándola libre de grasa e impurezas.",
     "etiquetas": ["0-12", "19-30", "grasa", "acne"],
     "imagen": "ID1.png",
     "precio": 28.00
+=======
+    "nombre": "Défense Total Protector Solar Hidratación Rostro FPS50 con Color 30ml",
+    "descripcion": "Protector Facial Diario no Grasoso en Loción FPS 50 Color Naturelle.",
+    "etiquetas": ["31-45","46-60", "61+","normal"],
+    "imagen": "ID1N.png",
+    "precio": 17.41
+>>>>>>> Stashed changes
   },
+  
 
   {
     "id": 2,
+<<<<<<< Updated upstream
     "nombre": "GEL ANTI-ACNÉ",
     "descripcion": "Antiacné es un tratamiento nocturno.",
     "etiquetas": ["acne","grasa"],
     "imagen": "ID2.png",
     "precio": 32.00
+=======
+    "nombre": "Essential Agua Micelar Efecto 180ml.",
+    "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
+    "etiquetas": ["31-45","normal"],
+    "imagen": "ID2N.png",
+    "precio": 11.38
+  },
+  {
+    "id": 3,
+    "nombre": "Essential Agua Micelar Efecto 180ml.",
+    "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
+    "etiquetas": ["46-60","normal"],
+    "imagen": "ID2N.png",
+    "precio": 11.38
+  },
+  {
+    "id": 4,
+    "nombre": "Essential Agua Micelar Efecto 180ml.",
+    "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
+    "etiquetas": ["61+", "normal"],
+    "imagen": "ID2N.png",
+    "precio": 11.38
+  },
+{
+    "id": 5,
+    "nombre": "Essential Agua Micelar Efecto 180ml.",
+    "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
+    "etiquetas": ["13-18", "grasa"],
+    "imagen": "ID2N.png",
+    "precio": 11.38
+>>>>>>> Stashed changes
   },
 
+
   {
+<<<<<<< Updated upstream
     "id": 3,
     "nombre": "TÓNICO FACIAL TÉ VERDE",
     "descripcion": "Para piel grasa, antioxidante de amplio espectro para sus propiedades desinflamantes útil para pieles acneicas y humectante.",
     "etiquetas": ["0-12","13-18", "19-30", "grasa", "acne"],
     "imagen": "ID3.png",
     "precio": 18.75
+=======
+    "id": 6,
+    "nombre": "Crema Nutritiva para el rostro Concentré Total 15",
+    "descripcion": "Concentrado antiedad facial en crema con quince beneficios. 50g (8.6 x 9.7 x 7.1 cm) NSOC33885-24CO.",
+    "etiquetas": ["31-45","grasa"],
+    "imagen": "ID3N.png",
+    "precio": 38.58
+  },
+  {
+    "id": 7,
+    "nombre": "Crema Nutritiva para el rostro Concentré Total 15",
+    "descripcion": "Concentrado antiedad facial en crema con quince beneficios. 50g (8.6 x 9.7 x 7.1 cm) NSOC33885-24CO.",
+    "etiquetas": ["31-45","normal"],
+    "imagen": "ID3N.png",
+    "precio": 38.58
+>>>>>>> Stashed changes
   },
 
+
   {
+<<<<<<< Updated upstream
     "id": 4,
     "nombre": "Photoderm AKN MAT SPF30",
     "descripcion": "Piel con tendencia acneica Piel mixta grasa",
@@ -51,6 +112,128 @@
     "etiquetas": ["acne", "19-30"],
     "imagen": "ID6.png",
     "precio": 22.50
+=======
+    "id": 8,
+    "nombre": "Defense Total Bloqueador Facial Anti-Edad FPS50",
+    "descripcion": "Un protector solar facial anti-fotoenvejecimiento con protectores de colágeno, que otorga 24H de hidratación intensa con una textura ultraligera y acción antioxidante",
+    "etiquetas": ["31-45", "46-60","61+", "seca"],
+    "imagen": "ID1S.png",
+    "precio": 18.08
+  },
+
+  {
+    "id": 9,
+    "nombre": "Crema Facial Hidratante para el día + Concentré Cell 50g",
+    "descripcion": "Crema facial antiedad de uso diurno, formulada especialmente para rejuvenecer y proteger tu piel. Esta crema para la cara hidrata intensamente tu piel.",
+    "etiquetas": ["31-45","arrugas"],
+    "imagen": "ID2S.png",
+    "precio": 40.18
+  },
+
+  {
+    "id": 10,
+    "nombre": "Défense Total Protector Solar Hidratación Antiedad Rostro FPS50 con Color 30ml",
+    "descripcion": "Protector Facial Diario no Grasoso en Loción FPS 50 Color Naturelle.",
+    "etiquetas": ["61+", "normal"],
+    "imagen": "ID1N.png",
+    "precio": 17.41
+  },
+
+  {
+    "id": 11,
+    "nombre": "Essential Agua Micelar Efecto Antiedad 180ml.",
+    "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
+    "etiquetas": ["31-45", "46-60","61+", "normal","seca","grasa"],
+    "imagen": "ID2N.png",
+    "precio": 11.38
+  },
+
+  {
+    "id": 12,
+    "nombre": "Crema Nutritiva para el rostro Concentré Total 15",
+    "descripcion": "Concentrado antiedad facial en crema con quince beneficios. 50g (8.6 x 9.7 x 7.1 cm) NSOC33885-24CO.",
+    "etiquetas": ["31-45", "46-60","61+", "normal","grasa"],
+    "imagen": "ID3N.png",
+    "precio": 38.58
+  },
+
+  {
+    "id": 13,
+    "nombre": "Defense Total Bloqueador Facial Anti-Edad FPS50",
+    "descripcion": "Un protector solar facial anti-fotoenvejecimiento con protectores de colágeno, que otorga 24H de hidratación intensa con una textura ultraligera y acción antioxidante",
+    "etiquetas": ["31-45", "46-60","61+", "seca"],
+    "imagen": "ID1S.png",
+    "precio": 18.08
+  },
+
+  {
+    "id": 14,
+    "nombre": "Crema Facial Hidratante para el día + Concentré Cell 50g",
+    "descripcion": "Crema facial antiedad de uso diurno, formulada especialmente para rejuvenecer y proteger tu piel. Esta crema para la cara hidrata intensamente tu piel.",
+    "etiquetas": ["31-45", "46-60","61+", "seca","arrugas"],
+    "imagen": "ID2S.png",
+    "precio": 40.18
+  },
+
+  {
+    "id": 15,
+    "nombre": "Serum Vitamina C Lumi Age AM 27 ml",
+    "descripcion": "Descubre el poder transformador de nuestro Serum vitamina c Intensivo Antioxidante de Día. Diseñado con una fórmula avanzada, este suero facial es tu aliado esencial para combatir los signos del envejecimiento y proteger la piel de los agresores medioambientales. (4.1 x 4.1 x 10.8 cm)",
+    "etiquetas": ["31-45", "46-60","61+", "seca"],
+    "imagen": "ID3S.png",
+    "precio": 30.80
+  },
+
+  {
+    "id": 16,
+    "nombre": "Défense Total Protector Solar Compacto Rostro FPS50",
+    "descripcion": "Protector solar para rostro en crema compacta acabado mate FPS50 9.5g (2.35 x 7.97x 8.11 cm)",
+    "etiquetas": ["31-45", "46-60","61+","grasa"],
+    "imagen": "ID1G.png",
+    "precio": 22.10
+  },
+  {
+    "id": 17,
+    "nombre": "Sérum Spécialiste Anti-Oleosidad",
+    "descripcion": "Sérum Intensivo Anti-Imperfecciones 28 ml e .94 fl. oz.(4.15 x 4.15 x 12.3 cm) NSOC22664-23CO.",
+    "etiquetas": ["31-45", "46-60","61+","grasa"],
+    "imagen": "ID2G.png",
+    "precio": 33.48
+  },
+  {
+    "id": 18,
+    "nombre": "Sérum Reductor de Arrugas con Ácido Hialurónico",
+    "descripcion": "Sérum intensivo reductor de la apariencia de arrugas. 30ml e 1fl. oz.(4.15 x 4.15 x 12.3 cm) NSOC29578-24CO.",
+    "etiquetas": ["31-45", "46-60","61+","arrugas"],
+    "imagen": "ID1A.png",
+    "precio": 34.16
+  },
+  {
+    "id": 19,
+    "nombre": "Sérum antiarrugas profundas y firmeza con Retinol",
+    "descripcion": "Suero Intensivo Nocturno Antiarrugas y Mejoría de Firmeza 27 ml e 1 fl.oz. (4.15 x 4.15 x 12.3 cm) NSOC34499-24CO.",
+    "etiquetas": ["31-45", "46-60","61+","arrugas"],
+    "imagen": "ID2A.png",
+    "precio": 33.48
+  },
+
+  {
+    "id": 20,
+    "nombre": "Concentrado Antiedad Nocturne con Ácido Hialurónico 30 ml",
+    "descripcion": "Concentrado antiedad de renovación nocturna para el rostro. 30 ml e 1 fl. Oz.",
+    "etiquetas": ["31-45", "46-60","61+","arrugas"],
+    "imagen": "ID3A.png",
+    "precio": 33.48
+  },
+
+  {
+    "id": 21,
+    "nombre": "Essential Agua Micelar Efecto Antiedad 180ml.",
+    "descripcion": "Es un Agua Micelar con Ácido Hialurónico para todo tipo de piel, incluso pieles sensibles y con poder desmaquillante. Este limpiador facial es el complemento perfecto para tu rutina de skincare. 180ml.",
+    "etiquetas": ["31-45", "normal","seca","grasa"],
+    "imagen": "ID2N.png",
+    "precio": 11.38
+>>>>>>> Stashed changes
   }
 
 ] 

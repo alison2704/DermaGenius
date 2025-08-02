@@ -47,13 +47,12 @@ class ModeloIA:
         self.etiquetas_tipo_piel = ["seca", "normal", "grasa"]  # mapea dry→seca, normal→normal, oily→grasa
         # Mapeo de etiquetas del modelo a etiquetas de productos
         self.mapeo_edad = {
-            # Aquí debes ajustar según las etiquetas que realmente devuelve tu modelo YOLO de edad
-            "0-12": "0-12",
-            "13-18": "13-18", 
-            "19-30": "19-30",
-            "31-45": "31-50",  # Si tienes más rangos
-            "46+": "60+",
-            "61+": "61+",       # Si tienes más rangos
+            # Mapeo según las etiquetas que realmente devuelve tu modelo YOLO de edad
+            "13-18": "13-18",
+            "19-30": "19-30", 
+            "31-45": "31-45",
+            "46-60": "46-60",
+            "61+": "61+",
             # Agregar más mapeos según los nombres reales de tu modelo
         }
 
@@ -61,6 +60,10 @@ class ModeloIA:
             # Mapeo de detecciones YOLO a etiquetas de productos
             "acne": "acne",
             "arrugas": "arrugas",
+            "pimple": "acne",
+            "wrinkle": "arrugas",
+            "blackhead": "acne",
+            "whitehead": "acne",
             # Agregar más mapeos según tu modelo YOLO de piel
         }
 
@@ -109,29 +112,41 @@ class ModeloIA:
             salida = self.modelo_tipo_piel(tensor)
             pred = torch.argmax(salida, dim=1).item()
             etiqueta_tipo = self.etiquetas_tipo_piel[pred]
+            # Obtener la confianza del tipo de piel
+            confianza_tipo_piel = torch.softmax(salida, dim=1)[0][pred].item()
 
         # Mapear etiquetas para recomendación de productos
-        etiquetas_mapeadas = []
+        etiquetas_mapeadas = {
+            "edad": None,
+            "tipo_piel": etiqueta_tipo,
+            "afecciones": []
+        }
         
         # Mapear edad
         if etiqueta_edad in self.mapeo_edad:
-            etiquetas_mapeadas.append(self.mapeo_edad[etiqueta_edad])
-        
-        # Mapear tipo de piel
-        etiquetas_mapeadas.append(etiqueta_tipo)
+            etiquetas_mapeadas["edad"] = self.mapeo_edad[etiqueta_edad]
         
         # Mapear afecciones de piel
         for etiqueta in etiquetas_piel:
             if etiqueta.lower() in self.mapeo_afecciones:
-                etiquetas_mapeadas.append(self.mapeo_afecciones[etiqueta.lower()])
+                etiquetas_mapeadas["afecciones"].append(self.mapeo_afecciones[etiqueta.lower()])
 
+        # Crear lista plana de todas las etiquetas para compatibilidad
+        todas_etiquetas = []
+        if etiquetas_mapeadas["edad"]:
+            todas_etiquetas.append(etiquetas_mapeadas["edad"])
+        todas_etiquetas.append(etiquetas_mapeadas["tipo_piel"])
+        todas_etiquetas.extend(etiquetas_mapeadas["afecciones"])
+        
         # Eliminar duplicados manteniendo el orden
-        etiquetas_mapeadas = list(dict.fromkeys(etiquetas_mapeadas))
+        todas_etiquetas = list(dict.fromkeys(todas_etiquetas))
 
         return {
             "clasificacion": etiqueta_edad,
             "deteccion": etiquetas_piel,
-            "cajas_deteccion": cajas_deteccion,  # Nuevo campo con coordenadas
+            "cajas_deteccion": cajas_deteccion,
             "tipo_piel": etiqueta_tipo,
-            "etiquetas_productos": etiquetas_mapeadas  # Nuevas etiquetas para recomendación
+            "confianza_tipo_piel": confianza_tipo_piel,
+            "etiquetas_detalladas": etiquetas_mapeadas,  # Etiquetas separadas por modelo
+            "etiquetas_productos": todas_etiquetas  # Lista plana para recomendación
         }
