@@ -23,8 +23,8 @@ async def recomendar_productos(etiquetas: List[str] = Body(...)):
     productos_recomendados = []
     
     for producto in productos:
-        # Verificar si alguna etiqueta del producto coincide con las etiquetas de predicción
-        if any(etiqueta in producto["etiquetas"] for etiqueta in etiquetas):
+        # Verificar si TODAS las etiquetas del producto coinciden con las etiquetas de predicción
+        if all(etiqueta in etiquetas for etiqueta in producto["etiquetas"]):
             productos_recomendados.append(producto)
     
     return {
