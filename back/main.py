@@ -14,6 +14,7 @@ app = FastAPI(
 
 origins = [
     "http://localhost:5173",  # frontend en desarrollo
+    "https://gljsmphc-5173.use2.devtunnels.ms",
 ]
 
 app.add_middleware(

@@ -148,7 +148,7 @@
     "nombre": "CREMA HIDRATANTE PIEL SECA",
     "descripcion": "Crema nutritiva especialmente formulada para pieles secas con ingredientes humectantes.",
     "etiquetas": ["seca", "19-30"],
-    "imagen": "ID5.png",
+    "imagen": "ID6.jpeg",
     "precio": 35.00
   },
   {
@@ -156,7 +156,7 @@
     "nombre": "CREMA HIDRATANTE PIEL SECA",
     "descripcion": "Crema nutritiva especialmente formulada para pieles secas con ingredientes humectantes.",
     "etiquetas": ["seca", "31-50"],
-    "imagen": "ID5.png",
+    "imagen": "ID6.jpeg",
     "precio": 35.00
   },
   {
@@ -164,7 +164,7 @@
     "nombre": "LOCIÓN PIEL NORMAL",
     "descripcion": "Loción equilibrante para mantener la piel normal hidratada y saludable.",
     "etiquetas": ["normal", "19-30"],
-    "imagen": "ID6.png",
+    "imagen": "ID5.jpeg",
     "precio": 22.50
   },
   {
@@ -572,7 +572,7 @@
     "nombre": "CREMA HIDRATANTE PIEL SECA",
     "descripcion": "Crema nutritiva especialmente formulada para pieles secas con ingredientes humectantes.",
     "etiquetas": ["seca", "0-12"],
-    "imagen": "ID5.png",
+    "imagen": "ID6.jpeg",
     "precio": 35.00
   },
     {
@@ -580,7 +580,7 @@
     "nombre": "CREMA HIDRATANTE PIEL SECA",
     "descripcion": "Crema nutritiva especialmente formulada para pieles secas con ingredientes humectantes.",
     "etiquetas": ["seca", "13-18"],
-    "imagen": "ID5.png",
+    "imagen": "ID6.jpeg",
     "precio": 35.00
   },
     {
@@ -588,7 +588,7 @@
     "nombre": "LOCIÓN PIEL NORMAL",
     "descripcion": "Loción equilibrante para mantener la piel normal hidratada y saludable.",
     "etiquetas": ["normal", "0-12"],
-    "imagen": "ID6.png",
+    "imagen": "ID5.jpeg",
     "precio": 22.50
   },
     {
@@ -596,7 +596,7 @@
     "nombre": "LOCIÓN PIEL NORMAL",
     "descripcion": "Loción equilibrante para mantener la piel normal hidratada y saludable.",
     "etiquetas": ["normal", "13-18"],
-    "imagen": "ID6.png",
+    "imagen": "ID5.jpeg",
     "precio": 22.50
   },
   {
