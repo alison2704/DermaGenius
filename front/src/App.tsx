@@ -79,6 +79,7 @@ function App() {
   const [analisisResultado, setAnalisisResultado] = useState<string>("");
   const [productosRecomendados, setProductosRecomendados] = useState<Product[]>([]);
   const [cajasDeteccion, setCajasDeteccion] = useState<any[]>([]);
+  const [errorMensaje, setErrorMensaje] = useState<string | null>(null);
 
 
   // Inicializa la cámara al cargar la pantalla de diagnóstico
@@ -124,30 +125,25 @@ const enviarImagenAlBackend = async (blob: Blob) => {
       body: formData
     });
 
-    console.log("📡 status:", response.status, response.statusText);
-
     const text = await response.text();
-    console.log("💬 raw response body:", text);
-
-    // intenta parsear JSON sólo si es JSON válido
     let data;
     try {
       data = JSON.parse(text);
     } catch(e) {
-      console.error("❌ No es JSON válido:", e);
       throw new Error("Respuesta no JSON");
     }
 
     if (!response.ok) {
-      console.error("❌ response.ok === false, data:", data);
+      // Si el backend retorna error de rostro, propaga el mensaje
+      if (data && data.detail) {
+        throw new Error(data.detail);
+      }
       throw new Error("Error en la respuesta del servidor");
     }
 
-    console.log("✅ data:", data);
     return data.resultado;
-  } catch (error) {
-    console.error("🚨 enviarImagenAlBackend error:", error);
-    return null;
+  } catch (error: any) {
+    throw error; // Propaga el error para manejarlo en captureImage
   }
 };
 
@@ -190,6 +186,7 @@ const captureImage = async () => {
     setCapturedImage(imageData);
     setIsAnalyzing(true);
     setDiagnosisComplete(false);
+    setErrorMensaje(null);
 
     // 👉 Convertir base64 a Blob
     const base64Data = imageData.split(",")[1];
@@ -201,31 +198,37 @@ const captureImage = async () => {
     const byteArray = new Uint8Array(byteNumbers);
     const blob = new Blob([byteArray], { type: "image/jpeg" });
 
-    const resultado = await enviarImagenAlBackend(blob);
+    try {
+      const resultado = await enviarImagenAlBackend(blob);
 
-    if (resultado) {
-      const { clasificacion, deteccion, tipo_piel, cajas_deteccion } = resultado;
+      if (resultado) {
+        const { clasificacion, deteccion, tipo_piel, cajas_deteccion } = resultado;
 
-      const detecciones = deteccion.length > 0
-        ? deteccion.join(", ")
-        : "ninguna anomalía detectada";
+        const detecciones = deteccion.length > 0
+          ? deteccion.join(", ")
+          : "ninguna anomalía detectada";
 
-      setAnalisisResultado(  
-        `🔍 Edad estimada: ${clasificacion}.\n` +
-        `🩺 Análisis de piel: ${detecciones}.\n` +
-        `💧 Tipo de piel: ${tipo_piel}.`
-      );
+        setAnalisisResultado(  
+          `🔍 Edad estimada: ${clasificacion}.\n` +
+          `🩺 Análisis de piel: ${detecciones}.\n` +
+          `💧 Tipo de piel: ${tipo_piel}.`
+        );
 
-      // Guardar las cajas de detección para mostrarlas en la imagen
-      setCajasDeteccion(cajas_deteccion || []);
+        // Guardar las cajas de detección para mostrarlas en la imagen
+        setCajasDeteccion(cajas_deteccion || []);
 
-      // Obtener recomendaciones basadas en las etiquetas de detección
-      const etiquetas = [...deteccion, tipo_piel, clasificacion];
-      const recomendaciones = await obtenerRecomendaciones(etiquetas);
-      setProductosRecomendados(recomendaciones);
-    } else {
-      setAnalisisResultado("❌ No se pudo realizar la predicción.");
-      setProductosRecomendados(mockProducts); // Fallback
+        // Obtener recomendaciones basadas en las etiquetas de detección
+        const etiquetas = [...deteccion, tipo_piel, clasificacion];
+        const recomendaciones = await obtenerRecomendaciones(etiquetas);
+        setProductosRecomendados(recomendaciones);
+      } else {
+        setAnalisisResultado("❌ No se pudo realizar la predicción.");
+        setProductosRecomendados(mockProducts);
+      }
+    } catch (error: any) {
+      setAnalisisResultado("");
+      setProductosRecomendados([]);
+      setErrorMensaje(error.message || "Error al analizar la imagen.");
     }
 
     setIsAnalyzing(false);
@@ -534,6 +537,20 @@ const DiagnosisScreen = () => (
                     </p>
                   </div>
                 )}
+              </div>
+            )}
+            {errorMensaje && (
+              <div className="error-message" style={{
+                background: "#fff0f0",
+                color: "#b91c1c",
+                border: "1px solid #ef4444",
+                borderRadius: "0.75rem",
+                padding: "1rem",
+                marginBottom: "1rem",
+                fontWeight: "bold",
+                textAlign: "center"
+              }}>
+                {errorMensaje}
               </div>
             )}
           </div>
